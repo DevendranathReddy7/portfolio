@@ -7,7 +7,7 @@ export const DesktopLayout = styled.div`
   }
   display: flex;
   justify-content: space-around;
-  margin: 3% 20% 0% 20%;
+  margin: 1.5% 20% 0% 20%;
   align-items: center;
 `;
 
