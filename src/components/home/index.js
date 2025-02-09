@@ -1,7 +1,16 @@
-import { useState, useEffect } from "react";
-import { HomeContainer, H1, P, ButtonContainer, Button } from "./styles";
+import React, { useState, useEffect } from "react";
+import {
+  HomeContainer,
+  H1,
+  P,
+  Headers,
+  AboutPara,
+  ContactIcon,
+} from "./styles";
 import portfolioConstants from "../../common/constants";
-import ArrowBtn from "../../common/components/ArrowBtn";
+import Projects, { RecentWorks } from "./Projects";
+import ContactMe from "./ContactMe";
+import parse from "html-react-parser";
 
 const Home = () => {
   const [initialLoad, setInitialLoad] = useState(false);
@@ -11,16 +20,22 @@ const Home = () => {
   }, []);
 
   return (
-    <HomeContainer>
-      <H1 animation={initialLoad}>{portfolioConstants.TITLE}</H1>
-      <P animation={initialLoad}>{portfolioConstants.SUMMARY}</P>
-      <ButtonContainer>
-        <Button animation={initialLoad}>
-          {portfolioConstants.CONTACT_BTN}
-          <ArrowBtn text="Contact Me" />
-        </Button>
-      </ButtonContainer>
-    </HomeContainer>
+    <React.Fragment>
+      <HomeContainer>
+        <H1 animation={initialLoad}>{portfolioConstants.TITLE}</H1>
+        <P animation={initialLoad}>{portfolioConstants.SUMMARY}</P>
+        <ContactMe initialLoad={initialLoad} />
+        <Projects />
+      </HomeContainer>
+      <Headers>ABOUT ME</Headers>
+      <AboutPara>
+        <ContactIcon />
+        {parse(portfolioConstants.ABOUT.replace(/\n/g, "<br/>"))}
+      </AboutPara>
+
+      <Headers>PROJECTS</Headers>
+      <RecentWorks />
+    </React.Fragment>
   );
 };
 

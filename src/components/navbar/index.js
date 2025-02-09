@@ -18,7 +18,7 @@ const Navbar = () => {
       <Link to="/works">
         <LinkPara>WORKS</LinkPara>
       </Link>
-      <Link to="/contact">
+      <Link to="/contact-me">
         <LinkPara>CONTACT</LinkPara>
       </Link>
     </DesktopLayout>
