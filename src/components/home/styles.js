@@ -31,6 +31,10 @@ export const H1 = styled.h1`
   margin-bottom: -0.5%;
   animation: ${(props) => (props.animation ? slideUp : "none")} 2s ease-in-out
     forwards;
+
+  @media (max-width: ${screenDimensions.mobile}) {
+    font-size: 200%;
+  }
 `;
 
 export const P = styled.p`
@@ -42,35 +46,6 @@ export const P = styled.p`
     forwards;
 `;
 
-export const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-`;
-export const Button = styled.button`
-  animation: ${(props) => (props.animation ? slideUp : "none")} 2s ease-in-out
-    forwards;
-  background: linear-gradient(
-    180deg,
-    rgb(255, 146, 104) 0%,
-    rgb(249, 92, 31) 100%
-  );
-  border-style: none;
-  border-radius: 50px;
-  padding: 10px 12px;
-  font-size: 18px;
-  font-weight: bold;
-  font-family: "General Sans Semibold", sans-serif;
-  color: white;
-  width: 200px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  @media (max-width: ${screenDimensions.tablet}) {
-    margin-bottom: 30px;
-  }
-`;
-
 export const Headers = styled.p`
   font-family: "General Sans Regular", sans-serif;
   text-align: start;
@@ -80,15 +55,30 @@ export const Headers = styled.p`
   letter-spacing: 7.2px;
 `;
 
+export const ButtonsDiv = styled.div`
+  display: flex;
+  justify-content: space-around;
+  @media (max-width: ${screenDimensions.mobile}) {
+    flex-direction: column;
+    padding: 5%;
+  }
+`;
 export const AboutPara = styled.p`
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   color: #131315;
   font-family: "General Sans Semibold", sans-serif;
-  margin-right: 5%;
+  margin: 0% 5%;
   font-size: 26px;
   line-height: 120%;
+  text-align: right;
+  @media (max-width: ${screenDimensions.tablet}) {
+    flex-direction: column;
+    text-align: left;
+    font-size: 18px;
+    line-height: 120%;
+  }
 `;
 export const ContactIcon = styled(IoMdContact)`
   width: 2300px;

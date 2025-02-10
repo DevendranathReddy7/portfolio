@@ -43,14 +43,25 @@ export const RecentWorksContainer = styled.div`
   display: flex;
   justify-content: space-around;
   margin: 1% 5%;
+  @media (max-width: ${screenDimensions.tablet}) {
+    flex-direction: column;
+  }
 `;
 
 export const RecentWorksImg = styled.img`
   border-radius: 15px;
   width: 40%;
+  @media (max-width: ${screenDimensions.tablet}) {
+    width: 80%;
+    margin: 0% 4%;
+    align-items: center;
+  }
 `;
 export const RecentWorksDescription = styled.div`
   width: 50%;
+  @media (max-width: ${screenDimensions.tablet}) {
+    width: 100%;
+  }
 `;
 
 export const Id = styled.p`
@@ -59,6 +70,9 @@ export const Id = styled.p`
   color: #c4c4c4;
   font-weight: bold;
   letter-spacing: 1.9;
+  @media (max-width: ${screenDimensions.tablet}) {
+    display: none;
+  }
 `;
 
 export const Title = styled.p`
