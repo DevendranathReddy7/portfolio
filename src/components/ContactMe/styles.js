@@ -19,6 +19,10 @@ export const ContactContainer = styled.div`
 
 export const ContentDiv = styled.div`
   width: 70%;
+  @media (max-width: ${screenDimensions.mobile}) {
+    width: 100%;
+    justify-content: flex-start;
+  }
 `;
 
 export const ContactIcon = styled(IoMdContact)`
@@ -39,6 +43,9 @@ export const H1 = styled.h1`
   line-height: 100%;
   padding: 2% 7% 0% 7%;
   margin-bottom: -0.5%;
+  @media (max-width: ${screenDimensions.mobile}) {
+    font-size: 200%;
+  }
 `;
 
 export const Button = styled.button`
@@ -61,6 +68,11 @@ export const Button = styled.button`
   color: rgb(0, 0, 0);
   box-shadow: transparent 0px 0px 0px 1px inset;
   margin-top: 3%;
+  &:disabled {
+    background: linear-gradient(to right, #e0e0e0, #d3d3d3);
+    color: black;
+    cursor: not-allowed;
+  }
 `;
 
 export const Input = styled.input`
@@ -102,4 +114,9 @@ export const TextArea = styled.textarea`
   font-size: 16px;
   color: rgb(0, 0, 0);
   margin-top: 3%;
+`;
+
+export const ErrorP = styled.p`
+  color: red;
+  margin: 0.5%;
 `;

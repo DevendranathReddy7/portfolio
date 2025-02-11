@@ -40,8 +40,9 @@ export const TitleDiv = styled.div`
   align-items: center;
 `;
 
-export const Title = styled.p`
+export const Title = styled.a`
   font-size: 22px;
   font-weight: bold;
   font-family: sans-serif;
+  text-decoration: none;
 `;

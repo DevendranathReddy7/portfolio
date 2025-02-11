@@ -18,6 +18,10 @@ export const H1 = styled.h1`
   line-height: 100%;
   padding: 7% 7% 0% 7%;
   margin-bottom: 5%;
+
+  @media (max-width: ${screenDimensions.mobile}) {
+    font-size: 200%;
+  }
 `;
 
 export const HR = styled.hr`
@@ -32,6 +36,11 @@ export const Links = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 0.5% 3%;
+
+  @media (max-width: ${screenDimensions.mobile}) {
+    flex-direction: column;
+    align-content: space-around;
+  }
 `;
 
 export const IconDiv = styled.div`
@@ -40,6 +49,10 @@ export const IconDiv = styled.div`
   font-size: 18px;
   font-weight: bold;
   font-family: "General Sans Semibold", sans-serif;
+
+  @media (max-width: ${screenDimensions.mobile}) {
+    width: 100%;
+  }
 `;
 
 export const ContactIcon = styled(IoMdContact)`
@@ -58,6 +71,9 @@ export const LinkItems = styled.div`
   width: 60%;
   justify-content: space-around;
   align-self: center;
+  @media (max-width: ${screenDimensions.mobile}) {
+    width: 100%;
+  }
 `;
 
 export const Headers = styled.p`
@@ -77,7 +93,7 @@ export const LinkPara = styled.p`
 `;
 
 export const TC = styled.h5`
-  color: #bcbcc2;
+  color: #acacac5e;
   font-size: 16px;
   font-weight: bold;
   font-family: "General Sans Semibold", sans-serif;
