@@ -11,9 +11,9 @@ import {
   LinkPara,
   TC,
 } from "./styles";
-import ContactMe from "../home/ContactMe";
 import portfolioConstants from "../../common/constants";
 import { Link } from "react-router-dom";
+import ButtonComponent from "../../common/components/ButtonComponent";
 
 const links = [
   {
@@ -48,7 +48,9 @@ const Footer = (props) => {
   return (
     <FooterContainer>
       <H1>{portfolioConstants.OFFER}</H1>
-      <ContactMe />
+      <Link to="/contact-me" style={{ textDecoration: "none" }}>
+        <ButtonComponent text="contactMe" navigateTo="/contact-me" />
+      </Link>
       <HR />
       <Links>
         <IconDiv>
