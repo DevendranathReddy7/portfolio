@@ -33,6 +33,9 @@ export const ContactIcon = styled(IoMdContact)`
     width: 120px;
     height: 120px;
   }
+  @media (max-width: ${screenDimensions.mobile}) {
+    margin-bottom: -120px;
+  }
 `;
 
 export const H1 = styled.h1`

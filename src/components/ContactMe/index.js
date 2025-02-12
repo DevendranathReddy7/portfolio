@@ -43,12 +43,21 @@ const ContactMe = () => {
     setError(false); // Reset error on change
   };
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
     if (!name || !email || !message || !validEmail) {
       setError(true);
     } else {
-      console.log("Form Submitted:", { name, email, message });
+      const sendMail = await fetch(`http://localhost:5000/send-email`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, message }),
+      });
+
+      const resp = await sendMail.json();
+      console.log(resp);
     }
   };
 

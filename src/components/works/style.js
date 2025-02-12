@@ -46,3 +46,20 @@ export const Title = styled.a`
   font-family: sans-serif;
   text-decoration: none;
 `;
+
+export const Tooltip = styled.p`
+  position: absolute;
+  top: 35px;
+  left: -60px;
+  background: linear-gradient(
+    180deg,
+    rgb(255, 146, 104) 0%,
+    rgb(249, 92, 31) 100%
+  );
+  color: white;
+  padding: 5px;
+  border-radius: 4px;
+  white-space: nowrap;
+  margin: 0;
+  font-family: sans-serif;
+`;
