@@ -127,5 +127,5 @@ export const ErrorP = styled.p`
 export const ResponseContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: "center";
+  justify-content: center;
 `;

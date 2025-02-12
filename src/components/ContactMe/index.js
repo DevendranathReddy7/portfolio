@@ -21,7 +21,9 @@ const ContactMe = () => {
   const [message, setMessage] = useState("");
   const [validEmail, setValidEmail] = useState(true);
 
-  const [apiResponse, setApiResponse] = useState(false);
+  const [apiSuccess, setApiSuccess] = useState(false);
+  const [apiError, setApiError] = useState(false);
+
   const [error, setError] = useState(false);
 
   useEffect(() => {
@@ -55,7 +57,6 @@ const ContactMe = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    setApiResponse(false);
     if (!name || !email || !companyName || !message || !validEmail) {
       setError(true);
     } else {
@@ -69,35 +70,33 @@ const ContactMe = () => {
 
       const resp = await sendMail.json();
       if (resp.status === "success") {
-        setApiResponse(true);
+        setApiSuccess(true);
         setName("");
         setEmail("");
         setComapyName("");
         setMessage("");
       } else {
-        setApiResponse(false);
+        setApiError(true);
       }
     }
   };
 
-  const showAPIResponse = () => {
+  const showAPISuccess = () => {
     return (
-      <React.Fragment>
-        {apiResponse ? (
-          <ResponseContainer>
-            <TiTickOutline color="green" size={30} />
-            <p style={{ color: "green" }}> Email Sent successfully!</p>
-          </ResponseContainer>
-        ) : (
-          <ResponseContainer>
-            <RxCross1 color="red" size={25} />
-            <p style={{ color: "red" }}>
-              Error While Sending an Email..Please try again!
-            </p>
-          </ResponseContainer>
-        )}
-      </React.Fragment>
+      <ResponseContainer>
+        <TiTickOutline color="green" size={30} />
+        <p style={{ color: "green" }}> Email Sent successfully!</p>
+      </ResponseContainer>
     );
+  };
+
+  const showAPIError = () => {
+    <ResponseContainer>
+      <RxCross1 color="red" size={25} />
+      <p style={{ color: "red" }}>
+        Error While Sending an Email..Please try again!
+      </p>
+    </ResponseContainer>;
   };
 
   return (
@@ -128,7 +127,8 @@ const ContactMe = () => {
           />
           {error && <ErrorP>All fields are mandatory!</ErrorP>}
           {!validEmail && <ErrorP>Please enter a valid email!</ErrorP>}
-          {showAPIResponse()}
+          {apiSuccess && showAPISuccess()}
+          {apiError && showAPIError()}
           <Button
             disabled={
               !name || !email || !companyName || !message || !validEmail
