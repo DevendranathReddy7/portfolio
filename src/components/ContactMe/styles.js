@@ -123,3 +123,9 @@ export const ErrorP = styled.p`
   color: red;
   margin: 0.5%;
 `;
+
+export const ResponseContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: "center";
+`;

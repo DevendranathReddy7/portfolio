@@ -8,13 +8,18 @@ app.use(cors());
 app.use(express.json());
 
 app.post("/send-email", async (req, res) => {
-  const { name, email, message } = req.body;
+  const { name, email, companyName, message } = req.body;
 
   if (!name) {
     res.status(400).json({ message: "Please provide a valid Name", error });
   }
   if (!email) {
     res.status(400).json({ message: "Please provide a valid Email", error });
+  }
+  if (!companyName) {
+    res
+      .status(400)
+      .json({ message: "Please provide your Company Name", error });
   }
   if (!message) {
     res.status(400).json({ message: "Message filed can't be empty!", error });
@@ -30,16 +35,21 @@ app.post("/send-email", async (req, res) => {
     });
 
     let mailOptions = {
-      from: email,
-      to: "devendrareddy7733@gmail.com",
-      subject: `Message from ${name}`,
+      from: process.env.EMAIL,
+      replyTo: email,
+      to: process.env.EMAIL,
+      subject: `Message from ${name} of ${companyName}`,
       text: message,
     };
 
     await transporter.sendMail(mailOptions);
-    res.status(200).json({ message: "Email sent successfully!" });
+    res
+      .status(200)
+      .json({ status: "success", message: "Email sent successfully!" });
   } catch (error) {
-    res.status(500).json({ message: "Error sending email", error });
+    res
+      .status(500)
+      .json({ status: "error", message: "Error sending email", error });
   }
 });
 

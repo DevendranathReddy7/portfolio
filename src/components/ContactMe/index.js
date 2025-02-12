@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { TiTickOutline } from "react-icons/ti";
+import { RxCross1 } from "react-icons/rx";
+
 import {
   ContactContainer,
   ContactIcon,
@@ -8,14 +11,18 @@ import {
   Input,
   TextArea,
   ErrorP,
+  ResponseContainer,
 } from "./styles";
 
 const ContactMe = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [message, setMessage] = useState(""); // Fixed typo
+  const [companyName, setComapyName] = useState("");
+  const [message, setMessage] = useState("");
+  const [validEmail, setValidEmail] = useState(true);
+
+  const [apiResponse, setApiResponse] = useState(false);
   const [error, setError] = useState(false);
-  const [validEmail, setValidEmail] = useState(true); // Default to true (invalid state)
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -33,6 +40,9 @@ const ContactMe = () => {
         const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         setValidEmail(emailRegex.test(value)); // Validate the input value
         break;
+      case "companyName":
+        setComapyName(value);
+        break;
       case "message":
         setMessage(value);
         break;
@@ -45,7 +55,8 @@ const ContactMe = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    if (!name || !email || !message || !validEmail) {
+    setApiResponse(false);
+    if (!name || !email || !companyName || !message || !validEmail) {
       setError(true);
     } else {
       const sendMail = await fetch(`http://localhost:5000/send-email`, {
@@ -53,12 +64,40 @@ const ContactMe = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, email, message }),
+        body: JSON.stringify({ name, email, companyName, message }),
       });
 
       const resp = await sendMail.json();
-      console.log(resp);
+      if (resp.status === "success") {
+        setApiResponse(true);
+        setName("");
+        setEmail("");
+        setComapyName("");
+        setMessage("");
+      } else {
+        setApiResponse(false);
+      }
     }
+  };
+
+  const showAPIResponse = () => {
+    return (
+      <React.Fragment>
+        {apiResponse ? (
+          <ResponseContainer>
+            <TiTickOutline color="green" size={30} />
+            <p style={{ color: "green" }}> Email Sent successfully!</p>
+          </ResponseContainer>
+        ) : (
+          <ResponseContainer>
+            <RxCross1 color="red" size={25} />
+            <p style={{ color: "red" }}>
+              Error While Sending an Email..Please try again!
+            </p>
+          </ResponseContainer>
+        )}
+      </React.Fragment>
+    );
   };
 
   return (
@@ -77,6 +116,11 @@ const ContactMe = () => {
             value={email}
             onChange={(e) => changeHandler(e, "email")}
           />
+          <Input
+            placeholder="Company Name"
+            value={companyName}
+            onChange={(e) => changeHandler(e, "companyName")}
+          />
           <TextArea
             placeholder="Message"
             value={message}
@@ -84,8 +128,12 @@ const ContactMe = () => {
           />
           {error && <ErrorP>All fields are mandatory!</ErrorP>}
           {!validEmail && <ErrorP>Please enter a valid email!</ErrorP>}
-
-          <Button disabled={!name || !email || !message || !validEmail}>
+          {showAPIResponse()}
+          <Button
+            disabled={
+              !name || !email || !companyName || !message || !validEmail
+            }
+          >
             Submit
           </Button>
         </form>
