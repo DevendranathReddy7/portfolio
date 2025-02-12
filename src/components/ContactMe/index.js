@@ -20,7 +20,7 @@ const ContactMe = () => {
   const [companyName, setComapyName] = useState("");
   const [message, setMessage] = useState("");
   const [validEmail, setValidEmail] = useState(true);
-
+  const [isloading, setIsloading] = useState(false);
   const [apiSuccess, setApiSuccess] = useState(false);
   const [apiError, setApiError] = useState(false);
 
@@ -32,7 +32,8 @@ const ContactMe = () => {
 
   const changeHandler = (event, field) => {
     const value = event.target.value;
-
+    setApiSuccess(false);
+    setApiError(false);
     switch (field) {
       case "name":
         setName(value);
@@ -60,6 +61,7 @@ const ContactMe = () => {
     if (!name || !email || !companyName || !message || !validEmail) {
       setError(true);
     } else {
+      setIsloading(true);
       const sendMail = await fetch(`http://localhost:5000/send-email`, {
         method: "POST",
         headers: {
@@ -78,6 +80,7 @@ const ContactMe = () => {
       } else {
         setApiError(true);
       }
+      setIsloading(false);
     }
   };
 
@@ -127,6 +130,11 @@ const ContactMe = () => {
           />
           {error && <ErrorP>All fields are mandatory!</ErrorP>}
           {!validEmail && <ErrorP>Please enter a valid email!</ErrorP>}
+          {isloading && (
+            <p style={{ color: "rgb(229, 92, 31)" }}>
+              Please wait while we are sending your Email!
+            </p>
+          )}
           {apiSuccess && showAPISuccess()}
           {apiError && showAPIError()}
           <Button
