@@ -68,13 +68,16 @@ const ContactMe = () => {
       setError(true);
     } else {
       setisLoading(true);
-      const sendMail = await fetch(`http://localhost:5000/send-email`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name, email, companyName, message }),
-      });
+      const sendMail = await fetch(
+        `https://devendranathreddyportfolio.onrender.com/send-email`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ name, email, companyName, message }),
+        }
+      );
 
       const resp = await sendMail.json();
       if (resp.status === "success") {

@@ -1,7 +1,8 @@
-require("dotenv").config();
 const express = require("express");
 const nodemailer = require("nodemailer");
 const cors = require("cors");
+
+require("dotenv").config();
 
 const app = express();
 app.use(cors());
@@ -11,18 +12,20 @@ app.post("/send-email", async (req, res) => {
   const { name, email, companyName, message } = req.body;
 
   if (!name) {
-    res.status(400).json({ message: "Please provide a valid Name", error });
+    res.status(400).json({ message: "Please provide a valid Name" });
+    return;
   }
   if (!email) {
-    res.status(400).json({ message: "Please provide a valid Email", error });
+    res.status(400).json({ message: "Please provide a valid Email" });
+    return;
   }
   if (!companyName) {
-    res
-      .status(400)
-      .json({ message: "Please provide your Company Name", error });
+    res.status(400).json({ message: "Please provide your Company Name" });
+    return;
   }
   if (!message) {
-    res.status(400).json({ message: "Message filed can't be empty!", error });
+    res.status(400).json({ message: "Message field can't be empty!" });
+    return;
   }
 
   try {
