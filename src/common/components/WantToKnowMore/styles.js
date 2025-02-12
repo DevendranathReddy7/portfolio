@@ -19,4 +19,7 @@ export const Card = styled(motion.div)`
     flex-direction: column;
     font-size: 18px;
   }
+  @media (max-width: ${screenDimensions.tablet}) {
+    margin-left: -4%;
+  }
 `;

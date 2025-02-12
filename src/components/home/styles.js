@@ -17,7 +17,6 @@ export const HomeContainer = styled.div`
   background-color: #131315;
   margin: -2% 5% 1% 5%;
   width: 90%;
-  min-height: 100vh;
   border-radius: 40px;
 `;
 

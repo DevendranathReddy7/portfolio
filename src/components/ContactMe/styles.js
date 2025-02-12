@@ -6,7 +6,6 @@ export const ContactContainer = styled.div`
   background-color: #131315;
   margin: 1% 5%;
   width: 90%;
-  min-height: 100vh;
   border-radius: 40px;
   display: flex;
   justify-content: space-between;
@@ -32,9 +31,6 @@ export const ContactIcon = styled(IoMdContact)`
   @media (max-width: ${screenDimensions.desktop}) {
     width: 120px;
     height: 120px;
-  }
-  @media (max-width: ${screenDimensions.mobile}) {
-    margin-bottom: -120px;
   }
 `;
 

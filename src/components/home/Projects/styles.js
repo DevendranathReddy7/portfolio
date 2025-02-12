@@ -54,13 +54,13 @@ export const RecentWorksImg = styled.img`
   @media (max-width: ${screenDimensions.tablet}) {
     width: 80%;
     margin: 0% 4%;
-    align-items: center;
   }
 `;
 export const RecentWorksDescription = styled.div`
   width: 50%;
   @media (max-width: ${screenDimensions.tablet}) {
     width: 100%;
+    text-align: left;
   }
 `;
 
