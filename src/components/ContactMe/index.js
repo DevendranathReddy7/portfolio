@@ -20,7 +20,7 @@ const ContactMe = () => {
   const [companyName, setComapyName] = useState("");
   const [message, setMessage] = useState("");
   const [validEmail, setValidEmail] = useState(true);
-  const [isloading, setIsloading] = useState(false);
+  const [isLoading, setisLoading] = useState(false);
   const [apiSuccess, setApiSuccess] = useState(false);
   const [apiError, setApiError] = useState(false);
 
@@ -29,6 +29,12 @@ const ContactMe = () => {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setApiSuccess(false);
+    }, 3000);
+  }, [apiSuccess]);
 
   const changeHandler = (event, field) => {
     const value = event.target.value;
@@ -61,7 +67,7 @@ const ContactMe = () => {
     if (!name || !email || !companyName || !message || !validEmail) {
       setError(true);
     } else {
-      setIsloading(true);
+      setisLoading(true);
       const sendMail = await fetch(`http://localhost:5000/send-email`, {
         method: "POST",
         headers: {
@@ -80,7 +86,7 @@ const ContactMe = () => {
       } else {
         setApiError(true);
       }
-      setIsloading(false);
+      setisLoading(false);
     }
   };
 
@@ -130,7 +136,7 @@ const ContactMe = () => {
           />
           {error && <ErrorP>All fields are mandatory!</ErrorP>}
           {!validEmail && <ErrorP>Please enter a valid email!</ErrorP>}
-          {isloading && (
+          {isLoading && (
             <p style={{ color: "rgb(229, 92, 31)" }}>
               Please wait while we are sending your Email!
             </p>
@@ -139,10 +145,15 @@ const ContactMe = () => {
           {apiError && showAPIError()}
           <Button
             disabled={
-              !name || !email || !companyName || !message || !validEmail
+              !name ||
+              !email ||
+              !companyName ||
+              !message ||
+              !validEmail ||
+              isLoading
             }
           >
-            Submit
+            {isLoading ? "Sending 🚀" : "Submit"}
           </Button>
         </form>
       </ContentDiv>
