@@ -15,16 +15,21 @@ import {
 } from "./styles";
 
 const ContactMe = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [companyName, setComapyName] = useState("");
-  const [message, setMessage] = useState("");
+  const [name, setName] = useState("Dev");
+  const [email, setEmail] = useState("dev@gmail.com");
+  const [companyName, setComapyName] = useState("spanIdea");
+  const [message, setMessage] = useState("Full stack developer");
   const [validEmail, setValidEmail] = useState(true);
   const [isLoading, setisLoading] = useState(false);
   const [apiSuccess, setApiSuccess] = useState(false);
   const [apiError, setApiError] = useState(false);
 
   const [error, setError] = useState(false);
+
+  const apiUrl =
+    window.location.hostname === "localhost"
+      ? "http://localhost:5000/send-email" // For local development
+      : "https://devendranathreddyportfolio.onrender.com/send-email";
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -69,16 +74,13 @@ const ContactMe = () => {
     } else {
       setisLoading(true);
       //https://devendranathreddyportfolio.onrender.com
-      const sendMail = await fetch(
-        `https://devendranathreddyportfolio.onrender.com/send-email`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ name, email, companyName, message }),
-        }
-      );
+      const sendMail = await fetch(apiUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, companyName, message }),
+      });
 
       const resp = await sendMail.json();
       if (resp.status === "success") {
