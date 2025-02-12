@@ -7,6 +7,7 @@ import {
   Description,
   TitleDiv,
   Title,
+  Tooltip,
 } from "./style";
 import {
   MdKeyboardArrowLeft,
@@ -14,7 +15,6 @@ import {
   MdArrowOutward,
 } from "react-icons/md";
 import { GoDotFill } from "react-icons/go";
-
 import parse from "html-react-parser";
 import { recentWorks } from "../../common/worksConstants";
 import WantToKnowMore from "../../common/components/WantToKnowMore/WantToKnowMore";
@@ -22,6 +22,7 @@ import WantToKnowMore from "../../common/components/WantToKnowMore/WantToKnowMor
 const Works = () => {
   const [currentWork, setCurrentWork] = useState(0);
   const [showResume, setShowResume] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -72,16 +73,25 @@ const Works = () => {
               <Title href={work.url} target="_blank">
                 {work.name}
               </Title>
-              <MdArrowOutward
-                size={30}
-                onClick={() => handleUrlClick(work.url)}
-              />
+              <div
+                style={{ position: "relative", display: "inline-block" }}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+              >
+                <MdArrowOutward
+                  size={30}
+                  onClick={() => handleUrlClick(work.url)}
+                  style={{ cursor: "pointer" }}
+                />
+                {isHovered && <Tooltip>View Project</Tooltip>}
+              </div>
             </TitleDiv>
             <p>{parse(work.description)}</p>
           </div>
         </Description>
         {recentWorks.map((work, index) => (
           <GoDotFill
+            key={index}
             color={index === currentWork ? "rgb(229, 92, 31)" : "black"}
           />
         ))}
