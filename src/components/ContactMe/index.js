@@ -73,7 +73,7 @@ const ContactMe = () => {
     setErrMsg("");
     //https://devendranathreddyportfolio.onrender.com
     try {
-      const sendMail = await fetch(apiUrl, {
+      const sendMail = await fetch("https://localhost:5000/send-email", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
