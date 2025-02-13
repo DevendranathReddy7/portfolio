@@ -25,6 +25,7 @@ const ContactMe = () => {
   const [apiError, setApiError] = useState(false);
 
   const [error, setError] = useState(false);
+  const [errMsg, setErrMsg] = useState("");
 
   const apiUrl =
     window.location.hostname === "localhost"
@@ -69,6 +70,7 @@ const ContactMe = () => {
 
   const makeApiCall = async () => {
     setisLoading(true);
+    setErrMsg("");
     //https://devendranathreddyportfolio.onrender.com
     try {
       const sendMail = await fetch(apiUrl, {
@@ -91,7 +93,7 @@ const ContactMe = () => {
       }
       setisLoading(false);
     } catch (err) {
-      alert(err.message);
+      setErrMsg(err.message);
       setisLoading(false);
       setApiError(true);
     }
@@ -151,6 +153,7 @@ const ContactMe = () => {
             onChange={(e) => changeHandler(e, "message")}
           />
           {error && <ErrorP>All fields are mandatory!</ErrorP>}
+          {errMsg && <ErrorP>{errMsg}</ErrorP>}
           {!validEmail && <ErrorP>Please enter a valid email!</ErrorP>}
           {isLoading && (
             <p style={{ color: "rgb(229, 92, 31)" }}>
