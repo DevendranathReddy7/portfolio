@@ -67,13 +67,10 @@ const ContactMe = () => {
     setError(false); // Reset error on change
   };
 
-  const submitHandler = async (e) => {
-    e.preventDefault();
-    if (!name || !email || !companyName || !message || !validEmail) {
-      setError(true);
-    } else {
-      setisLoading(true);
-      //https://devendranathreddyportfolio.onrender.com
+  const makeApiCall = async () => {
+    setisLoading(true);
+    //https://devendranathreddyportfolio.onrender.com
+    try {
       const sendMail = await fetch(apiUrl, {
         method: "POST",
         headers: {
@@ -93,6 +90,19 @@ const ContactMe = () => {
         setApiError(true);
       }
       setisLoading(false);
+    } catch (err) {
+      alert(err.message);
+      setisLoading(false);
+      setApiError(true);
+    }
+  };
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    if (!name || !email || !companyName || !message || !validEmail) {
+      setError(true);
+    } else {
+      makeApiCall();
     }
   };
 
