@@ -15,10 +15,10 @@ import {
 } from "./styles";
 
 const ContactMe = () => {
-  const [name, setName] = useState("Dev");
-  const [email, setEmail] = useState("dev@gmail.com");
-  const [companyName, setComapyName] = useState("spanIdea");
-  const [message, setMessage] = useState("Full stack developer");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [companyName, setComapyName] = useState("");
+  const [message, setMessage] = useState("");
   const [validEmail, setValidEmail] = useState(true);
   const [isLoading, setisLoading] = useState(false);
   const [apiSuccess, setApiSuccess] = useState(false);
