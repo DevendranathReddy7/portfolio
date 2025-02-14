@@ -27,10 +27,10 @@ const ContactMe = () => {
   const [error, setError] = useState(false);
   const [errMsg, setErrMsg] = useState("");
 
-  // const apiUrl =
-  //   window.location.hostname === "localhost"
-  //     ? "http://localhost:5000/send-email" // For local development
-  //     : "https://devendranathreddyportfolio.onrender.com/send-email";
+  const apiUrl =
+    window.location.hostname === "localhost"
+      ? "http://localhost:5000/send-email" // For local development
+      : "https://devendranathreddyportfolio.onrender.com/send-email";
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -73,7 +73,7 @@ const ContactMe = () => {
     setErrMsg("");
     //https://devendranathreddyportfolio.onrender.com
     try {
-      const sendMail = await fetch("https://localhost:5000/send-email", {
+      const sendMail = await fetch(apiUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
